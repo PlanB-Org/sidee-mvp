@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs"
+    "migrate": "node --env-file-if-exists=.env.local scripts/migrate.mjs",
+    "test": "node --test --experimental-strip-types \"lib/**/*.test.ts\""
   },
   "dependencies": {
     "@wanteddev/wds": "3.12.1",
