@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# sidee-mvp — 팀 케미 진단
 
-## Getting Started
+프로젝트 시작 전(해커톤·사이드 프로젝트·팀원 합류) 팀원들의 작업 성향을 10문항으로 수집해,
+**"미리 합의해야 할 지점"** 을 짚어주는 진단 리포트.
 
-First, run the development server:
+점수로 팀을 평가하지 않는다. 리포트의 성공 기준은 "이걸 보고 팀에서 대화가 시작되는가".
+
+- 대상: 2~5명 팀
+- 로그인 없음. 팀 토큰 링크(`/t/{token}`)로만 접근
+
+## 스택
+
+- Next.js 16 (App Router) — 프론트 + API Route Handlers 단일 앱
+- React 19 / TypeScript
+- Tailwind CSS v4 (레이아웃·간격)
+- 원티드 디자인 시스템 Montage `@wanteddev/wds` (컴포넌트) — 설치 예정
+
+## 개발
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # 프로덕션 빌드
+npm run lint    # ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 문서
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+기획서는 `docs/team-chemistry-v1-spec.md` (git 미추적, 로컬 보관).
