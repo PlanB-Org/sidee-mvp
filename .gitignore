@@ -49,3 +49,6 @@ docs/
 # ide
 .idea/
 *.iml
+
+# .env.example 은 실제 값이 없으니 추적한다
+!.env.example
