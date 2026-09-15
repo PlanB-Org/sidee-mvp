@@ -18,15 +18,15 @@
 ## 개발
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 http://localhost:3000
 
 ```bash
-npm run build   # 프로덕션 빌드
-npm run lint    # ESLint
+pnpm build   # 프로덕션 빌드
+pnpm lint    # ESLint
 ```
 
 ## 문서
