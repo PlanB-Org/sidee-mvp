@@ -1,6 +1,14 @@
-@import "tailwindcss";
+/*
+ * Tailwind preflight 를 제외한다. 리셋은 @wanteddev/wds/global.css 가 담당한다.
+ * (스펙의 `corePlugins.preflight: false` 는 Tailwind v3 문법이라 v4 에서는 동작하지 않는다.)
+ */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 @theme {
-  --font-sans: "Pretendard JP", Pretendard, system-ui, -apple-system,
-    "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-sans: "Pretendard Variable", "Pretendard JP Variable", Pretendard,
+    "Pretendard JP", -apple-system, BlinkMacSystemFont, system-ui,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 }

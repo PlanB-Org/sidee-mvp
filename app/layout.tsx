@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "@wanteddev/wds";
+import { AppRouterCacheProvider } from "@wanteddev/wds-nextjs";
+
+import "@wanteddev/wds/global.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" className="h-full antialiased">
+    <html lang="ko" suppressHydrationWarning className="h-full">
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link
@@ -24,7 +28,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="flex flex-col">
+        <ThemeProvider>
+          <AppRouterCacheProvider options={{ prepend: true }}>
+            {children}
+          </AppRouterCacheProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
