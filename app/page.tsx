@@ -11,7 +11,7 @@ import {
   TextField,
   Typography,
 } from "@wanteddev/wds";
-import { Container } from "@/components/page-shell";
+import { Page } from "@/components/layout";
 import { api } from "@/lib/client";
 
 const SIZES = ["2", "3", "4", "5"];
@@ -39,7 +39,7 @@ export default function Home() {
   };
 
   return (
-    <Container>
+    <Page>
       <div className="flex flex-col gap-2">
         <Typography variant="title2" weight="bold">
           시작 전에 맞춰볼 것들
@@ -88,6 +88,6 @@ export default function Home() {
           링크 만들기
         </Button>
       </div>
-    </Container>
+    </Page>
   );
 }

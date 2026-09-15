@@ -10,7 +10,7 @@ import {
   Typography,
   useToast,
 } from "@wanteddev/wds";
-import { Container, NotFound, PageLoading } from "@/components/page-shell";
+import { NotFound, Page, PageLoading } from "@/components/layout";
 import { api, ApiError, copy, inviteUrl } from "@/lib/client";
 import type { TeamView } from "@/lib/types";
 
@@ -41,7 +41,7 @@ export default function Created({ params }: PageProps<"/t/[token]/created">) {
   };
 
   return (
-    <Container>
+    <Page>
       <div className="flex flex-col gap-2">
         <Typography variant="title3" weight="bold">
           {view.team.name} 링크가 만들어졌어요
@@ -73,6 +73,6 @@ export default function Created({ params }: PageProps<"/t/[token]/created">) {
           </TextButton>
         )}
       </div>
-    </Container>
+    </Page>
   );
 }

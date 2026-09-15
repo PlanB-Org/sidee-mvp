@@ -1,6 +1,6 @@
 /*
  * Tailwind preflight 를 제외한다. 리셋은 @wanteddev/wds/global.css 가 담당한다.
- * (스펙의 `corePlugins.preflight: false` 는 Tailwind v3 문법이라 v4 에서는 동작하지 않는다.)
+ * (기획서의 `corePlugins.preflight: false` 는 Tailwind v3 문법이라 v4 에서는 동작하지 않는다.)
  */
 @layer theme, base, components, utilities;
 
@@ -11,4 +11,32 @@
   --font-sans: "Pretendard Variable", "Pretendard JP Variable", Pretendard,
     "Pretendard JP", -apple-system, BlinkMacSystemFont, system-ui,
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+
+  /*
+   * 브레이크포인트를 WDS 테마(theme.breakpoint)와 같은 값으로 맞춘다.
+   * 레이아웃은 Tailwind, 컴포넌트는 WDS 로 쓰는 구조라 두 시스템의 sm/md/lg 가
+   * 다른 지점에서 꺾이면 같은 화면이 구간마다 어긋난다.
+   * Tailwind 기본값은 640/768/1024/1280 이라 전부 덮어쓴다.
+   */
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 992px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1600px;
+  --breakpoint-2xl: initial; /* WDS 에 대응이 없다. 실수로 못 쓰게 지운다. */
+
+  /*
+   * 콘텐츠 폭. 화면마다 숫자를 흩뿌리지 않고 여기서만 관리한다.
+   * form  - 폼·본문용. 기획서 3장의 640px.
+   * wide  - 리포트용. 팀원이 열로 들어가는 Table 이 2개라 5인 팀이면 6열이다.
+   *         640 안에서는 데스크톱에서도 가로 스크롤이 생긴다.
+   */
+  --container-form: 640px;
+  --container-wide: 880px;
+
+  /* 좌우 여백. WDS containerStyle 이 sm 미만에서 쓰는 20px 과 같은 값. */
+  --spacing-gutter: 20px;
+
+  /* WDS 의 zIndex 토큰은 modal:1300 하나뿐이다. sticky 바는 그 아래에 둔다. */
+  --z-index-header: 100;
+  --z-index-bottom-bar: 90;
 }

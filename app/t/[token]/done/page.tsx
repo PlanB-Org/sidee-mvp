@@ -10,7 +10,7 @@ import {
   TextButton,
   useToast,
 } from "@wanteddev/wds";
-import { Container, NotFound, PageLoading } from "@/components/page-shell";
+import { NotFound, Page, PageLoading } from "@/components/layout";
 import { api, ApiError, copy, inviteUrl } from "@/lib/client";
 import type { TeamView } from "@/lib/types";
 
@@ -41,7 +41,7 @@ export default function Done({ params }: PageProps<"/t/[token]/done">) {
   };
 
   return (
-    <Container className="justify-center">
+    <Page center>
       <FallbackView>
         <FallbackViewContent>
           <FallbackViewText
@@ -61,6 +61,6 @@ export default function Done({ params }: PageProps<"/t/[token]/done">) {
         </Button>
         <TextButton onClick={onCopy}>링크 복사</TextButton>
       </div>
-    </Container>
+    </Page>
   );
 }

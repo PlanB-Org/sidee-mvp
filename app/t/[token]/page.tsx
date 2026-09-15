@@ -17,7 +17,7 @@ import {
   TextField,
   Typography,
 } from "@wanteddev/wds";
-import { Container, NotFound, PageLoading } from "@/components/page-shell";
+import { NotFound, Page, PageLoading, StickyBar } from "@/components/layout";
 import { api, ApiError } from "@/lib/client";
 import type { AnswerValue, Question, TeamView } from "@/lib/types";
 
@@ -97,7 +97,8 @@ export default function Answer({ params }: PageProps<"/t/[token]">) {
 
   return (
     <>
-      <Container className="pb-32">
+      {/* sticky 하단 바가 문서 흐름에서 자리를 차지하므로 본문에 추가 여백이 필요 없다. */}
+      <Page>
         <div className="flex items-center justify-between gap-3">
           <Typography variant="title3" weight="bold">
             {team.name}
@@ -221,10 +222,10 @@ export default function Answer({ params }: PageProps<"/t/[token]">) {
             <SectionMessage variant="negative">{error}</SectionMessage>
           </div>
         )}
-      </Container>
+      </Page>
 
-      <div className="sticky bottom-0 z-10">
-        <ActionArea background>
+      <StickyBar>
+        <ActionArea>
           <Button
             size="large"
             fullWidth
@@ -235,7 +236,7 @@ export default function Answer({ params }: PageProps<"/t/[token]">) {
             제출
           </Button>
         </ActionArea>
-      </div>
+      </StickyBar>
     </>
   );
 }

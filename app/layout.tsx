@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { ThemeProvider, TopNavigation } from "@wanteddev/wds";
+import { ThemeProvider } from "@wanteddev/wds";
 import { AppRouterCacheProvider } from "@wanteddev/wds-nextjs";
+import { AppHeader } from "@/components/layout";
 
 import "@wanteddev/wds/global.css";
 import "./globals.css";
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko" suppressHydrationWarning className="h-full">
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link
@@ -31,9 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex flex-col">
         <ThemeProvider>
           <AppRouterCacheProvider options={{ prepend: true }}>
-            <TopNavigation sx={{ maxWidth: 640, margin: "0 auto" }}>
-              팀 케미 진단
-            </TopNavigation>
+            <AppHeader />
             {children}
           </AppRouterCacheProvider>
         </ThemeProvider>

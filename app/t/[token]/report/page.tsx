@@ -26,7 +26,13 @@ import {
   Typography,
   useToast,
 } from "@wanteddev/wds";
-import { Container, NotFound, PageLoading } from "@/components/page-shell";
+import {
+  NotFound,
+  Page,
+  PageLoading,
+  Readable,
+  ScrollX,
+} from "@/components/layout";
 import { DistributionBar } from "@/components/distribution-bar";
 import { api, ApiError, copy, inviteUrl } from "@/lib/client";
 import type { ReportView, SplitAxis } from "@/lib/types";
@@ -43,7 +49,8 @@ function SplitCard({
   tone: "warning" | "neutral";
 }) {
   return (
-    <Card sx={{ padding: 20 }}>
+    <Readable>
+      <Card sx={{ padding: 20 }}>
       <div className="flex flex-col gap-4">
         <ContentBadge
           color={tone === "warning" ? "accent" : "neutral"}
@@ -55,8 +62,9 @@ function SplitCard({
         <Typography variant="body2-reading" color="semantic.label.alternative">
           {card.message}
         </Typography>
-      </div>
-    </Card>
+        </div>
+      </Card>
+    </Readable>
   );
 }
 
@@ -89,7 +97,7 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
 
   if (pending) {
     return (
-      <Container className="justify-center">
+      <Page center>
         <FallbackView>
           <FallbackViewContent>
             <FallbackViewText
@@ -103,7 +111,7 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
             링크 복사
           </Button>
         </div>
-      </Container>
+      </Page>
     );
   }
 
@@ -115,7 +123,7 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
   const warned = sections.coverage.filter((c) => c.warn);
 
   return (
-    <Container className="pb-16">
+    <Page width="wide">
       {/* 1. 헤더 */}
       <div className="flex flex-col gap-3">
         <Typography variant="title3" weight="bold">
@@ -161,7 +169,7 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
       {/* 4. 역할 커버리지 */}
       <section className="mt-10 flex flex-col gap-4">
         <SectionHeader headingTag="h2">역할 커버리지</SectionHeader>
-        <div className="overflow-x-auto">
+        <ScrollX>
           <Table>
             <TableHead>
               <TableRow>
@@ -197,7 +205,7 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
               ))}
             </TableBody>
           </Table>
-        </div>
+        </ScrollX>
         <Typography variant="caption1" color="semantic.label.assistive">
           ● 주력 · ○ 보조
           {warned.length === 0 && " · 비거나 몰린 역할이 없어요"}
@@ -208,7 +216,8 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
       {sections.aligned.length > 0 && (
         <section className="mt-10 flex flex-col gap-2">
           <SectionHeader headingTag="h2">잘 맞는 부분</SectionHeader>
-          <List>
+          <Readable>
+            <List>
             {sections.aligned.map((a) => (
               <ListCell
                 key={a.questionId}
@@ -216,7 +225,8 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
                 textProps={{ children: a.questionText, caption: a.answerLabel }}
               />
             ))}
-          </List>
+            </List>
+          </Readable>
         </section>
       )}
 
@@ -225,7 +235,8 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
         <Accordion divider>
           <AccordionSummary>전체 응답표</AccordionSummary>
           <AccordionDetails>
-            <div className="overflow-x-auto pt-2">
+            <div className="pt-2">
+              <ScrollX>
               <Table>
                 <TableHead>
                   <TableRow>
@@ -250,12 +261,13 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
                   ))}
                 </TableBody>
               </Table>
+              </ScrollX>
             </div>
           </AccordionDetails>
         </Accordion>
       </section>
 
-      <div className="mt-10">
+      <Readable className="mt-10">
         <Button
           variant="outlined"
           color="assistive"
@@ -265,7 +277,7 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
         >
           링크 복사
         </Button>
-      </div>
-    </Container>
+      </Readable>
+    </Page>
   );
 }
