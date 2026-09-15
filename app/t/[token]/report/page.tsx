@@ -10,9 +10,6 @@ import {
   Button,
   Card,
   ContentBadge,
-  FallbackView,
-  FallbackViewContent,
-  FallbackViewText,
   List,
   ListCell,
   SectionHeader,
@@ -27,6 +24,7 @@ import {
   useToast,
 } from "@wanteddev/wds";
 import {
+  EmptyState,
   NotFound,
   Page,
   PageLoading,
@@ -97,21 +95,14 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
 
   if (pending) {
     return (
-      <Page center>
-        <FallbackView>
-          <FallbackViewContent>
-            <FallbackViewText
-              title={`아직 ${pending.submitted}/${pending.expected_size}명이에요`}
-              description="2명 이상 제출되면 리포트를 볼 수 있어요."
-            />
-          </FallbackViewContent>
-        </FallbackView>
-        <div className="mt-8">
-          <Button fullWidth size="large" onClick={onCopy}>
-            링크 복사
-          </Button>
-        </div>
-      </Page>
+      <EmptyState
+        title={`아직 ${pending.submitted}/${pending.expected_size}명이에요`}
+        description="2명 이상 제출되면 리포트를 볼 수 있어요."
+      >
+        <Button fullWidth size="large" onClick={onCopy}>
+          링크 복사
+        </Button>
+      </EmptyState>
     );
   }
 
@@ -219,11 +210,15 @@ export default function Report({ params }: PageProps<"/t/[token]/report">) {
           <Readable>
             <List>
             {sections.aligned.map((a) => (
+              /* 본문은 ListCell 의 children 으로 넘긴다. 내부가
+                 <ListText {...textProps} children> 순서라 textProps.children 은 덮인다. */
               <ListCell
                 key={a.questionId}
                 divider
-                textProps={{ children: a.questionText, caption: a.answerLabel }}
-              />
+                textProps={{ caption: a.answerLabel }}
+              >
+                {a.questionText}
+              </ListCell>
             ))}
             </List>
           </Readable>

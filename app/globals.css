@@ -1,9 +1,24 @@
 /*
- * Tailwind preflight 를 제외한다. 리셋은 @wanteddev/wds/global.css 가 담당한다.
- * (기획서의 `corePlugins.preflight: false` 는 Tailwind v3 문법이라 v4 에서는 동작하지 않는다.)
+ * 캐스케이드 레이어 순서. 뒤에 올수록 세다.
+ *
+ * WDS global.css 는 `div, span, ... { margin:0; padding:0 }` 형태의 리셋을 담고 있다.
+ * 이걸 JS 에서 import 하면 레이어 밖(unlayered)에 놓이는데, 레이어 밖 CSS 는
+ * 레이어 안 CSS 를 무조건 이긴다. 그러면 @layer utilities 안의 Tailwind
+ * mx-auto / px-* / py-* 가 전부 죽는다. max-width 처럼 리셋이 건드리지 않는
+ * 속성만 살아남아서 "가운데 정렬도 여백도 없는" 레이아웃이 된다.
+ *
+ * 그래서 리셋을 여기서 가장 낮은 레이어로 명시적으로 import 한다.
+ * layout.tsx 에서 다시 import 하면 도로 unlayered 가 되므로 하면 안 된다.
+ *
+ * Emotion 이 런타임에 심는 WDS 컴포넌트 스타일은 여전히 레이어 밖이라
+ * 모든 레이어를 이긴다. 컴포넌트 내부 스타일은 className 이 아니라 sx 로 조정한다.
+ * (기획서 방침: 레이아웃·간격은 Tailwind, 컴포넌트 스타일은 WDS 그대로)
+ *
+ * Tailwind preflight 는 넣지 않는다. 리셋은 WDS 것 하나만 쓴다.
  */
-@layer theme, base, components, utilities;
+@layer wds-reset, theme, components, utilities;
 
+@import "@wanteddev/wds/global.css" layer(wds-reset);
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 

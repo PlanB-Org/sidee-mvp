@@ -2,15 +2,8 @@
 
 import Link from "next/link";
 import { use, useEffect, useState } from "react";
-import {
-  Button,
-  FallbackView,
-  FallbackViewContent,
-  FallbackViewText,
-  TextButton,
-  useToast,
-} from "@wanteddev/wds";
-import { NotFound, Page, PageLoading } from "@/components/layout";
+import { Button, TextButton, useToast } from "@wanteddev/wds";
+import { EmptyState, NotFound, PageLoading } from "@/components/layout";
 import { api, ApiError, copy, inviteUrl } from "@/lib/client";
 import type { TeamView } from "@/lib/types";
 
@@ -41,26 +34,18 @@ export default function Done({ params }: PageProps<"/t/[token]/done">) {
   };
 
   return (
-    <Page center>
-      <FallbackView>
-        <FallbackViewContent>
-          <FallbackViewText
-            title="제출됐어요"
-            description={
-              complete
-                ? `${team.expected_size}명 모두 제출했어요. 리포트를 확인해 보세요.`
-                : `현재 ${submitted.length}/${team.expected_size}명이에요.`
-            }
-          />
-        </FallbackViewContent>
-      </FallbackView>
-
-      <div className="mt-8 flex flex-col items-center gap-3">
-        <Button as={Link} href={`/t/${token}/report`} size="large" fullWidth>
-          리포트 보기
-        </Button>
-        <TextButton onClick={onCopy}>링크 복사</TextButton>
-      </div>
-    </Page>
+    <EmptyState
+      title="제출됐어요"
+      description={
+        complete
+          ? `${team.expected_size}명 모두 제출했어요. 리포트를 확인해 보세요.`
+          : `현재 ${submitted.length}/${team.expected_size}명이에요.`
+      }
+    >
+      <Button as={Link} href={`/t/${token}/report`} size="large" fullWidth>
+        리포트 보기
+      </Button>
+      <TextButton onClick={onCopy}>링크 복사</TextButton>
+    </EmptyState>
   );
 }

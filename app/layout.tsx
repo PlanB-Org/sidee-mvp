@@ -3,7 +3,7 @@ import { ThemeProvider } from "@wanteddev/wds";
 import { AppRouterCacheProvider } from "@wanteddev/wds-nextjs";
 import { AppHeader } from "@/components/layout";
 
-import "@wanteddev/wds/global.css";
+// WDS 리셋은 globals.css 가 레이어를 지정해서 import 한다. 여기서 또 부르면 unlayered 가 된다.
 import "./globals.css";
 
 export const metadata: Metadata = {

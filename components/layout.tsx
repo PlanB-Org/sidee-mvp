@@ -157,17 +157,42 @@ export function PageLoading() {
   );
 }
 
-export function NotFound() {
+/**
+ * 완료·오류·대기 화면의 공통 틀.
+ *
+ * FallbackView 는 기본 padding="normal" 로 위아래 160px 씩(합 320px)을 넣는다.
+ * 그 상태로 두면 박스가 화면 높이를 다 먹어서 Page 의 justify-center 가
+ * 중앙에 둘 여백이 없어지고, 내용이 아래로 밀려 보인다.
+ * 세로 중앙은 Page center 가 맡으므로 여기서는 자체 패딩을 0 으로 둔다.
+ */
+export function EmptyState({
+  title,
+  description,
+  children,
+}: {
+  title: ReactNode;
+  description?: ReactNode;
+  children?: ReactNode;
+}) {
   return (
     <Page center>
-      <FallbackView>
+      <FallbackView sx={{ paddingTop: 0, paddingBottom: 0, width: "100%" }}>
         <FallbackViewContent>
-          <FallbackViewText
-            title="링크를 찾을 수 없어요"
-            description="주소가 정확한지 확인해 주세요."
-          />
+          <FallbackViewText title={title} description={description} />
         </FallbackViewContent>
       </FallbackView>
+      {children && (
+        <div className="mt-10 flex flex-col items-center gap-2">{children}</div>
+      )}
     </Page>
+  );
+}
+
+export function NotFound() {
+  return (
+    <EmptyState
+      title="링크를 찾을 수 없어요"
+      description="주소가 정확한지 확인해 주세요."
+    />
   );
 }
