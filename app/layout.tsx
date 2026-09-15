@@ -9,6 +9,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className="h-full antialiased">
+      <head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin=""
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-jp-dynamic-subset.min.css"
+        />
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin=""
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css"
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

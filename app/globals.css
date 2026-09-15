@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Pretendard Variable", Pretendard, system-ui, -apple-system,
+  --font-sans: "Pretendard JP", Pretendard, system-ui, -apple-system,
     "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
