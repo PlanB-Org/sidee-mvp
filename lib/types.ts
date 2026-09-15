@@ -20,11 +20,6 @@ export type MemberAnswers = {
   answers: Record<number, AnswerValue>;
 };
 
-export type Team = {
-  name: string;
-  expectedSize: number;
-};
-
 /** 분포 바 한 칸: 선택지 하나와 그걸 고른 사람들. */
 export type OptionBucket = {
   optionIndex: number;
@@ -79,8 +74,17 @@ export type ReportSections = {
   raw: RawRow[];
 };
 
-export type Report = {
-  team: Team;
+
+/** GET /api/t/{token} 응답. */
+export type TeamView = {
+  team: { name: string; expected_size: number };
+  submitted: string[];
+  questions: Question[];
+};
+
+/** GET /api/t/{token}/report 의 200 응답. */
+export type ReportView = {
+  team: { name: string; expected_size: number };
   members: string[];
   sections: ReportSections;
 };

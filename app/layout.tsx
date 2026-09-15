@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@wanteddev/wds";
+import { ThemeProvider, TopNavigation } from "@wanteddev/wds";
 import { AppRouterCacheProvider } from "@wanteddev/wds-nextjs";
 
 import "@wanteddev/wds/global.css";
@@ -31,6 +31,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex flex-col">
         <ThemeProvider>
           <AppRouterCacheProvider options={{ prepend: true }}>
+            <TopNavigation sx={{ maxWidth: 640, margin: "0 auto" }}>
+              팀 케미 진단
+            </TopNavigation>
             {children}
           </AppRouterCacheProvider>
         </ThemeProvider>
