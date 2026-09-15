@@ -116,10 +116,15 @@ function QuestionCard({
         </List>
       ) : (
         <RadioGroup
+          /*
+           * 미선택 상태에 undefined 를 넘기면 Radix useControllableState 가
+           * uncontrolled 로 보고, 첫 선택 때 controlled 로 바뀌면서 경고가 뜬다.
+           * 빈 문자열은 어느 항목과도 매칭되지 않으면서 controlled 를 유지한다.
+           */
           value={
             typeof draft[question.id] === "number"
               ? String(draft[question.id])
-              : undefined
+              : ""
           }
           onValueChange={(v) =>
             setDraft((d) => ({ ...d, [question.id]: Number(v) }))
